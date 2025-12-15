@@ -82,11 +82,13 @@ export function VideoModal({ video, onClose }: VideoModalProps) {
                 <video
                     ref={videoRef}
                     src={video.url}
+                    poster={`/thumbnails/${video.id}.webp`}
                     className="w-full h-full object-cover"
                     autoPlay
                     loop
                     playsInline
                     muted={isMuted}
+                    preload="auto"
                     onClick={togglePlay}
                     onWaiting={() => setIsLoading(true)}
                     onPlaying={() => setIsLoading(false)}

@@ -82,7 +82,7 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
                 muted
                 playsInline
                 loop
-                preload="metadata" // Revert to metadata for better iOS support
+                preload="none" // Cards don't preload to save bandwidth for modal
             />
 
             {/* Overlay darkening */}
