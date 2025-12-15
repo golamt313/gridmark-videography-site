@@ -79,12 +79,12 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
             <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300 pointer-events-none" />
 
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-12 h-12 rounded-full bg-brand/90 backdrop-blur-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-50 group-hover:scale-100 shadow-lg shadow-brand/20">
+                <div className="w-12 h-12 rounded-full bg-brand/90 backdrop-blur-md flex items-center justify-center opacity-100 scale-100 md:opacity-0 md:scale-50 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 shadow-lg shadow-brand/20">
                     <Play fill="currentColor" className="text-brand-foreground w-5 h-5 ml-1" />
                 </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-5 pt-12 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div className="absolute bottom-0 left-0 right-0 p-5 pt-12 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="border-l-2 border-brand pl-3">
                     <p className="text-brand text-xs font-bold tracking-widest uppercase mb-1">{video.client}</p>
                     <h3 className="text-white text-sm font-medium leading-tight">{video.title}</h3>
