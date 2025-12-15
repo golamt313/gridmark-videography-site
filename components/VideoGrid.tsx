@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Video, VIDEOS, Category } from "@/data/videos";
 import { VideoCard } from "./VideoCard";
 import { VideoModal } from "./VideoModal";
@@ -12,6 +12,18 @@ const CATEGORIES: (Category | 'All')[] = ['All', 'Retail', 'Restaurants', 'Event
 export function VideoGrid() {
     const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
     const [activeCategory, setActiveCategory] = useState<Category | 'All'>('All');
+
+    // Pause ALL background videos when modal is open to free bandwidth
+    useEffect(() => {
+        if (selectedVideo) {
+            const allVideos = document.querySelectorAll('video');
+            allVideos.forEach((video) => {
+                video.pause();
+                video.removeAttribute('src'); // Stop buffering entirely
+                video.load(); // Reset the video element
+            });
+        }
+    }, [selectedVideo]);
 
     const filteredVideos = activeCategory === 'All'
         ? VIDEOS
