@@ -14,7 +14,7 @@ interface VideoCardProps {
 export const VideoCard = memo(function VideoCard({ video, onClick, index }: VideoCardProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const isInView = useInView(containerRef, { margin: "0px 0px -20% 0px", amount: 0.5 });
+    const isInView = useInView(containerRef, { margin: "0px 0px -20% 0px", amount: 0.7 });
 
     // State to track interaction mode
     const [isHovered, setIsHovered] = useState(false);
