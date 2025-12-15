@@ -14,7 +14,7 @@ interface VideoCardProps {
 export const VideoCard = memo(function VideoCard({ video, onClick, index }: VideoCardProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const isInView = useInView(containerRef, { margin: "0px 0px -20% 0px", amount: 0.7 });
+    const isInView = useInView(containerRef, { margin: "0px 0px -20% 0px", amount: 0.6 });
 
     // State to track interaction mode
     const [isHovered, setIsHovered] = useState(false);
@@ -23,7 +23,8 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
     // Detect if device supports hover (Desktop vs Mobile)
     useEffect(() => {
         const checkMobile = () => {
-            const media = window.matchMedia('(hover: none)');
+            // Check for touch capability OR lack of hover
+            const media = window.matchMedia('(pointer: coarse) or (hover: none)');
             setIsMobile(media.matches);
         };
 
@@ -81,7 +82,7 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
                 muted
                 playsInline
                 loop
-                preload="none"
+                preload="metadata" // Revert to metadata for better iOS support
             />
 
             {/* Overlay darkening */}
