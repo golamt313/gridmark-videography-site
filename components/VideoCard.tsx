@@ -33,7 +33,6 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
     }, []);
 
     // Playback Logic
-    // Playback Logic
     useEffect(() => {
         if (!videoRef.current) return;
 
@@ -44,7 +43,7 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
         const shouldPlay = isMobile ? isInView : isHovered;
 
         if (shouldPlay) {
-            // Debounce: Wait 500ms before playing to avoid network clogging on scroll
+            // Debounce: Wait 150ms before playing to avoid network clogging on scroll
             timeout = setTimeout(() => {
                 const playPromise = videoRef.current?.play();
                 if (playPromise !== undefined) {
@@ -52,7 +51,7 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
                         // Auto-play was prevented
                     });
                 }
-            }, 500);
+            }, 150);
         } else {
             videoRef.current.pause();
             if (!isMobile) videoRef.current.currentTime = 0; // Reset on desktop leave
