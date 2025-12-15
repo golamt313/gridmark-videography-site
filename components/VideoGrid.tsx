@@ -16,12 +16,17 @@ export function VideoGrid() {
     // Pause ALL background videos when modal is open to free bandwidth
     useEffect(() => {
         if (selectedVideo) {
-            const allVideos = document.querySelectorAll('video');
-            allVideos.forEach((video) => {
-                video.pause();
-                video.removeAttribute('src'); // Stop buffering entirely
-                video.load(); // Reset the video element
-            });
+            // Only target videos in the grid, not the modal
+            // We use a small delay to let the modal mount first
+            setTimeout(() => {
+                const gridVideos = document.querySelectorAll('.grid video');
+                gridVideos.forEach((video) => {
+                    const videoEl = video as HTMLVideoElement;
+                    videoEl.pause();
+                    videoEl.removeAttribute('src');
+                    videoEl.load();
+                });
+            }, 50);
         }
     }, [selectedVideo]);
 
