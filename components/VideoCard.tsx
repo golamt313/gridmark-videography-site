@@ -33,33 +33,23 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    // Playback Logic
+    // Playback Logic - Desktop only (hover to play)
+    // Mobile shows static thumbnails to preserve bandwidth for modal
     useEffect(() => {
-        if (!videoRef.current) return;
+        if (!videoRef.current || isMobile) return;
 
-        let timeout: NodeJS.Timeout;
-
-        // On Mobile: Play when in view
-        // On Desktop: Play when hovered
-        const shouldPlay = isMobile ? isInView : isHovered;
-
-        if (shouldPlay) {
-            // Debounce: Wait 150ms before playing to avoid network clogging on scroll
-            timeout = setTimeout(() => {
-                const playPromise = videoRef.current?.play();
-                if (playPromise !== undefined) {
-                    playPromise.catch(() => {
-                        // Auto-play was prevented
-                    });
-                }
-            }, 150);
+        if (isHovered) {
+            const playPromise = videoRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Auto-play was prevented
+                });
+            }
         } else {
             videoRef.current.pause();
-            if (!isMobile) videoRef.current.currentTime = 0; // Reset on desktop leave
+            videoRef.current.currentTime = 0;
         }
-
-        return () => clearTimeout(timeout);
-    }, [isMobile, isInView, isHovered]);
+    }, [isMobile, isHovered]);
 
     return (
         <motion.div
