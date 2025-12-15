@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Play } from "lucide-react";
 import { Video } from "@/data/videos";
 import { memo, useRef, useState, useEffect } from "react";
@@ -13,25 +13,23 @@ interface VideoCardProps {
 
 export const VideoCard = memo(function VideoCard({ video, onClick, index }: VideoCardProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
-    const [isPlaying, setIsPlaying] = useState(true);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const isInView = useInView(containerRef, { margin: "0px 0px -20% 0px", amount: 0.3 });
+    const [isPlaying, setIsPlaying] = useState(false);
 
-    // Effect to ensure video plays on mount
     useEffect(() => {
-        if (videoRef.current) {
+        if (isInView && videoRef.current) {
             videoRef.current.play().catch(() => { });
+            setIsPlaying(true);
+        } else if (!isInView && videoRef.current) {
+            videoRef.current.pause();
+            setIsPlaying(false);
         }
-    }, []);
-
-    const handleMouseEnter = () => {
-        // Already playing
-    };
-
-    const handleMouseLeave = () => {
-        // Do nothing - keep playing
-    };
+    }, [isInView]);
 
     return (
         <motion.div
+            ref={containerRef}
             layoutId={`card-${video.id}`}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -39,22 +37,16 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="relative group cursor-pointer rounded-xl overflow-hidden aspect-[9/16] bg-zinc-900 border border-zinc-800"
             onClick={() => onClick(video)}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
         >
-            {/* Since we don't have separate thumbnails in R2 yet, we use the video itself.
-          R2 is fast enough that the first frame loads instantly. 
-          For optimization, we set preload="metadata". */}
-
+            {/* R2 Video Streaming */}
             <video
                 ref={videoRef}
                 src={video.url}
                 className="absolute inset-0 w-full h-full object-cover"
                 muted
-                autoPlay
                 playsInline
                 loop
-                preload="metadata"
+                preload="none" // Important: Don't preload data until in view
             />
 
             {/* Overlay darkening */}
