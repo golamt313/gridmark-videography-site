@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import { Video } from "@/data/videos";
-import { memo, useRef, useState } from "react";
+import { memo, useRef, useState, useEffect } from "react";
 
 interface VideoCardProps {
     video: Video;
@@ -13,19 +13,21 @@ interface VideoCardProps {
 
 export const VideoCard = memo(function VideoCard({ video, onClick, index }: VideoCardProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [isPlaying, setIsPlaying] = useState(true);
+
+    // Effect to ensure video plays on mount
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.play().catch(() => { });
+        }
+    }, []);
 
     const handleMouseEnter = () => {
-        setIsPlaying(true);
-        setTimeout(() => {
-            videoRef.current?.play().catch(() => { });
-        }, 50);
+        // Already playing
     };
 
     const handleMouseLeave = () => {
-        setIsPlaying(false);
-        videoRef.current?.pause();
-        if (videoRef.current) videoRef.current.currentTime = 0;
+        // Do nothing - keep playing
     };
 
     return (
@@ -46,9 +48,10 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
 
             <video
                 ref={videoRef}
-                src={`${video.url}#t=0.1`} // Trick to force load first frame
+                src={video.url}
                 className="absolute inset-0 w-full h-full object-cover"
                 muted
+                autoPlay
                 playsInline
                 loop
                 preload="metadata"
