@@ -18,13 +18,25 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
     const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
-        if (isInView && videoRef.current) {
-            videoRef.current.play().catch(() => { });
-            setIsPlaying(true);
-        } else if (!isInView && videoRef.current) {
-            videoRef.current.pause();
-            setIsPlaying(false);
+        let timeout: NodeJS.Timeout;
+
+        if (isInView) {
+            // Debounce: Only play if remains in view for 500ms
+            timeout = setTimeout(() => {
+                if (videoRef.current) {
+                    videoRef.current.play().catch(() => { });
+                    setIsPlaying(true);
+                }
+            }, 500);
+        } else {
+            // Pause immediately when out of view
+            if (videoRef.current) {
+                videoRef.current.pause();
+                setIsPlaying(false);
+            }
         }
+
+        return () => clearTimeout(timeout);
     }, [isInView]);
 
     return (
