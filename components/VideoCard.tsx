@@ -33,24 +33,32 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
     }, []);
 
     // Playback Logic
+    // Playback Logic
     useEffect(() => {
         if (!videoRef.current) return;
+
+        let timeout: NodeJS.Timeout;
 
         // On Mobile: Play when in view
         // On Desktop: Play when hovered
         const shouldPlay = isMobile ? isInView : isHovered;
 
         if (shouldPlay) {
-            const playPromise = videoRef.current.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(() => {
-                    // Auto-play was prevented
-                });
-            }
+            // Debounce: Wait 500ms before playing to avoid network clogging on scroll
+            timeout = setTimeout(() => {
+                const playPromise = videoRef.current?.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(() => {
+                        // Auto-play was prevented
+                    });
+                }
+            }, 500);
         } else {
             videoRef.current.pause();
             if (!isMobile) videoRef.current.currentTime = 0; // Reset on desktop leave
         }
+
+        return () => clearTimeout(timeout);
     }, [isMobile, isInView, isHovered]);
 
     return (
@@ -74,7 +82,7 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
                 muted
                 playsInline
                 loop
-                preload="metadata"
+                preload="none"
             />
 
             {/* Overlay darkening */}
