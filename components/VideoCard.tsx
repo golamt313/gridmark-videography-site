@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Play } from "lucide-react";
 import { Video } from "@/data/videos";
-import { memo, useRef, useState } from "react";
+import { memo, useRef, useState, useEffect } from "react";
 
 interface VideoCardProps {
     video: Video;
@@ -13,23 +13,49 @@ interface VideoCardProps {
 
 export const VideoCard = memo(function VideoCard({ video, onClick, index }: VideoCardProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const isInView = useInView(containerRef, { margin: "0px 0px -20% 0px", amount: 0.5 });
 
-    const handleMouseEnter = () => {
-        setIsPlaying(true);
-        setTimeout(() => {
-            videoRef.current?.play().catch(() => { });
-        }, 50);
-    };
+    // State to track interaction mode
+    const [isHovered, setIsHovered] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
-    const handleMouseLeave = () => {
-        setIsPlaying(false);
-        videoRef.current?.pause();
-        if (videoRef.current) videoRef.current.currentTime = 0;
-    };
+    // Detect if device supports hover (Desktop vs Mobile)
+    useEffect(() => {
+        const checkMobile = () => {
+            const media = window.matchMedia('(hover: none)');
+            setIsMobile(media.matches);
+        };
+
+        checkMobile();
+        window.addEventListener('resize', checkMobile); // Re-check on orientation change etc
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    // Playback Logic
+    useEffect(() => {
+        if (!videoRef.current) return;
+
+        // On Mobile: Play when in view
+        // On Desktop: Play when hovered
+        const shouldPlay = isMobile ? isInView : isHovered;
+
+        if (shouldPlay) {
+            const playPromise = videoRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Auto-play was prevented
+                });
+            }
+        } else {
+            videoRef.current.pause();
+            if (!isMobile) videoRef.current.currentTime = 0; // Reset on desktop leave
+        }
+    }, [isMobile, isInView, isHovered]);
 
     return (
         <motion.div
+            ref={containerRef}
             layoutId={`card-${video.id}`}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -37,16 +63,13 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="relative group cursor-pointer rounded-xl overflow-hidden aspect-[9/16] bg-zinc-900 border border-zinc-800"
             onClick={() => onClick(video)}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Since we don't have separate thumbnails in R2 yet, we use the video itself.
-          R2 is fast enough that the first frame loads instantly. 
-          For optimization, we set preload="metadata". */}
-
             <video
                 ref={videoRef}
-                src={`${video.url}#t=0.1`} // Trick to force load first frame
+                src={video.url}
+                poster={`/thumbnails/${video.id}.webp`}
                 className="absolute inset-0 w-full h-full object-cover"
                 muted
                 playsInline
