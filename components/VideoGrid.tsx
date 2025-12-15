@@ -1,26 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import { Video, VIDEOS } from "@/data/videos";
+import { Video, VIDEOS, Category } from "@/data/videos";
 import { VideoCard } from "./VideoCard";
-import { VideoModal } from "./VideoModal"; // We will create this next
-import { AnimatePresence } from "framer-motion";
+import { VideoModal } from "./VideoModal";
+import { AnimatePresence, motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+
+const CATEGORIES: (Category | 'All')[] = ['All', 'Retail', 'Restaurants', 'Events'];
 
 export function VideoGrid() {
     const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+    const [activeCategory, setActiveCategory] = useState<Category | 'All'>('All');
+
+    const filteredVideos = activeCategory === 'All'
+        ? VIDEOS
+        : VIDEOS.filter(v => v.category === activeCategory);
 
     return (
-        <section className="container mx-auto px-4 py-12 pb-24">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {VIDEOS.map((video, index) => (
-                    <VideoCard
-                        key={video.id}
-                        video={video}
-                        index={index}
-                        onClick={setSelectedVideo}
-                    />
+        <section className="container mx-auto px-4 py-8 pb-32">
+            {/* Category Filter */}
+            <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
+                {CATEGORIES.map((cat) => (
+                    <button
+                        key={cat}
+                        onClick={() => setActiveCategory(cat)}
+                        className={cn(
+                            "px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 border",
+                            activeCategory === cat
+                                ? "bg-brand text-brand-foreground border-brand shadow-lg shadow-brand/20"
+                                : "bg-transparent text-zinc-500 border-zinc-800 hover:border-zinc-600 hover:text-zinc-300"
+                        )}
+                    >
+                        {cat}
+                    </button>
                 ))}
             </div>
+
+            <motion.div
+                layout
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            >
+                <AnimatePresence mode="popLayout">
+                    {filteredVideos.map((video) => (
+                        <VideoCard
+                            key={video.id}
+                            video={video}
+                            index={0} // Index 0 to avoid staggering mess on reorder, or we can keep it simple
+                            onClick={setSelectedVideo}
+                        />
+                    ))}
+                </AnimatePresence>
+            </motion.div>
 
             <AnimatePresence>
                 {selectedVideo && (

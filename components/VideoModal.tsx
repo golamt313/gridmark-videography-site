@@ -16,6 +16,7 @@ export function VideoModal({ video, onClose }: VideoModalProps) {
     const [isPlaying, setIsPlaying] = useState(true);
     const [isMuted, setIsMuted] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
         document.body.style.overflow = "hidden";
@@ -36,6 +37,23 @@ export function VideoModal({ video, onClose }: VideoModalProps) {
     const toggleMute = (e: React.MouseEvent) => {
         e.stopPropagation();
         setIsMuted(!isMuted);
+    };
+
+    const handleTimeUpdate = () => {
+        if (videoRef.current) {
+            const current = videoRef.current.currentTime;
+            const total = videoRef.current.duration;
+            setProgress((current / total) * 100);
+        }
+    };
+
+    const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = parseFloat(e.target.value);
+        if (videoRef.current) {
+            const time = (value / 100) * videoRef.current.duration;
+            videoRef.current.currentTime = time;
+            setProgress(value);
+        }
     };
 
     return (
@@ -73,6 +91,7 @@ export function VideoModal({ video, onClose }: VideoModalProps) {
                     onWaiting={() => setIsLoading(true)}
                     onPlaying={() => setIsLoading(false)}
                     onCanPlay={() => setIsLoading(false)}
+                    onTimeUpdate={handleTimeUpdate}
                 />
 
                 {isLoading && (
@@ -81,19 +100,35 @@ export function VideoModal({ video, onClose }: VideoModalProps) {
                     </div>
                 )}
 
-                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end justify-between opacity-0 hover:opacity-100 transition-opacity duration-300">
-                    <div className="text-white">
-                        <h2 className="text-xl font-bold tracking-tight">{video.title}</h2>
-                        <p className="text-xs text-brand font-bold tracking-widest uppercase mt-1">Gridmark Media</p>
+                <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex flex-col justify-end opacity-0 hover:opacity-100 transition-opacity duration-300">
+
+                    {/* Scrubber */}
+                    <div className="w-full mb-4 flex items-center gap-2 group/scrubber">
+                        <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value={progress}
+                            onChange={handleSeek}
+                            onClick={(e) => e.stopPropagation()}
+                            className="w-full h-1 bg-white/30 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-brand"
+                        />
                     </div>
 
-                    <div className="flex gap-2">
-                        <Button size="icon" variant="ghost" className="text-white hover:bg-white/10 hover:text-brand rounded-full transition-colors" onClick={toggleMute}>
-                            {isMuted ? <VolumeX /> : <Volume2 />}
-                        </Button>
-                        <Button size="icon" variant="ghost" className="text-white hover:bg-white/10 hover:text-brand rounded-full transition-colors" onClick={togglePlay}>
-                            {isPlaying ? <Pause /> : <Play />}
-                        </Button>
+                    <div className="flex items-end justify-between">
+                        <div className="text-white">
+                            <p className="text-xs text-brand font-bold tracking-widest uppercase mb-1">{video.client}</p>
+                            <h2 className="text-xl font-bold tracking-tight leading-none">{video.title}</h2>
+                        </div>
+
+                        <div className="flex gap-2">
+                            <Button size="icon" variant="ghost" className="text-white hover:bg-white/10 hover:text-brand rounded-full transition-colors" onClick={toggleMute}>
+                                {isMuted ? <VolumeX /> : <Volume2 />}
+                            </Button>
+                            <Button size="icon" variant="ghost" className="text-white hover:bg-white/10 hover:text-brand rounded-full transition-colors" onClick={togglePlay}>
+                                {isPlaying ? <Pause /> : <Play />}
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </motion.div>

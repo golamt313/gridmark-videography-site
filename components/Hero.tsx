@@ -15,7 +15,7 @@ export function Hero() {
                     Gridmark Media
                 </h1>
                 <p className="text-xs text-zinc-500 tracking-[0.2em] mt-1 pl-0.5">
-                    CINEMATIC VIDEOGRAPHY
+                    STRATEGIC SOCIAL MEDIA VIDEO CONTENT
                 </p>
             </motion.div>
         </header>

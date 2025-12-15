@@ -63,8 +63,11 @@ export const VideoCard = memo(function VideoCard({ video, onClick, index }: Vide
                 </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <h3 className="text-brand text-sm font-bold tracking-wide uppercase truncate border-l-2 border-brand pl-2">{video.title}</h3>
+            <div className="absolute bottom-0 left-0 right-0 p-5 pt-12 bg-gradient-to-t from-black/95 via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="border-l-2 border-brand pl-3">
+                    <p className="text-brand text-xs font-bold tracking-widest uppercase mb-1">{video.client}</p>
+                    <h3 className="text-white text-sm font-medium leading-tight">{video.title}</h3>
+                </div>
             </div>
         </motion.div>
     );
