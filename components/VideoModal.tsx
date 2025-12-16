@@ -120,7 +120,14 @@ export function VideoModal({ video, onClose }: VideoModalProps) {
                     <div className="flex items-end justify-between">
                         <div className="text-white">
                             <p className="text-xs text-brand font-bold tracking-widest uppercase mb-1">{video.client}</p>
-                            <h2 className="text-xl font-bold tracking-tight leading-none">{video.title}</h2>
+                            <h2 className="text-xl font-bold tracking-tight leading-none mb-4">{video.title}</h2>
+
+                            <a
+                                href="tel:+15555555555"
+                                className="inline-block px-5 py-2 bg-brand text-black text-xs font-bold uppercase tracking-widest rounded-full hover:bg-brand/90 transition-colors"
+                            >
+                                Book This Style
+                            </a>
                         </div>
 
                         <div className="flex gap-2">
