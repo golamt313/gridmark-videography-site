@@ -123,10 +123,10 @@ export function VideoModal({ video, onClose }: VideoModalProps) {
                             <h2 className="text-xl font-bold tracking-tight leading-none mb-4">{video.title}</h2>
 
                             <a
-                                href="tel:+15555555555"
+                                href="tel:+13137425658"
                                 className="inline-block px-5 py-2 bg-brand text-black text-xs font-bold uppercase tracking-widest rounded-full hover:bg-brand/90 transition-colors"
                             >
-                                Book This Style
+                                Book: (313) 742-5658
                             </a>
                         </div>
 

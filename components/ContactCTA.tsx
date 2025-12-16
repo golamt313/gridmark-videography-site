@@ -24,11 +24,11 @@ export function ContactCTA() {
                     </p>
 
                     <a
-                        href="tel:+15555555555"
+                        href="tel:+13137425658"
                         className="inline-flex items-center gap-3 px-8 py-4 bg-brand text-black font-bold uppercase tracking-widest rounded-full hover:bg-brand/90 transition-all duration-300 hover:scale-105 shadow-[0_0_20px_-5px_var(--brand)]"
                     >
                         <Phone size={20} />
-                        <span>Book a Call</span>
+                        <span>Call (313) 742-5658</span>
                     </a>
                 </motion.div>
             </div>

@@ -197,14 +197,14 @@ export function Pricing() {
                                 </ul>
 
                                 <a
-                                    href="tel:+15555555555"
+                                    href="tel:+13137425658"
                                     className={cn(
                                         "block text-center w-full py-3 px-6 rounded-lg font-bold uppercase tracking-wide transition-colors",
                                         pkg.isBestValue
                                             ? "bg-brand text-black hover:bg-brand/90"
                                             : "bg-zinc-800 text-white hover:bg-zinc-700"
                                     )}>
-                                    Get Started
+                                    Get Started: (313) 742-5658
                                 </a>
                             </motion.div>
                         ))}
