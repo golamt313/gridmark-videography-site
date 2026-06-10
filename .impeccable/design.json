@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-10T01:33:00Z",
+  "title": "Design System: Gridmark Videography",
+  "extensions": {
+    "colorMeta": {
+      "deep-black": { "role": "neutral", "displayName": "Deep Black", "canonical": "oklch(0.022 0.005 80)", "tonalRamp": ["oklch(0.022 0.005 80)", "oklch(0.07 0.006 80)", "oklch(0.12 0.007 80)", "oklch(0.17 0.008 80)", "oklch(0.22 0.008 80)", "oklch(0.35 0.01 80)", "oklch(0.50 0.012 80)", "oklch(0.65 0.012 80)"] },
+      "warm-white": { "role": "neutral", "displayName": "Warm White", "canonical": "oklch(0.98 0.005 80)", "tonalRamp": ["oklch(0.35 0.01 80)", "oklch(0.50 0.012 80)", "oklch(0.65 0.012 80)", "oklch(0.75 0.01 80)", "oklch(0.83 0.008 80)", "oklch(0.90 0.006 80)", "oklch(0.95 0.005 80)", "oklch(0.98 0.005 80)"] },
+      "screen-gold": { "role": "primary", "displayName": "Screen Gold", "canonical": "oklch(0.83 0.13 80)", "tonalRamp": ["oklch(0.22 0.06 80)", "oklch(0.33 0.08 80)", "oklch(0.44 0.10 80)", "oklch(0.55 0.11 80)", "oklch(0.65 0.12 80)", "oklch(0.73 0.125 80)", "oklch(0.83 0.13 80)", "oklch(0.92 0.08 80)"] },
+      "gold-contrast": { "role": "neutral", "displayName": "Gold Contrast", "canonical": "oklch(0.15 0.01 70)", "tonalRamp": ["oklch(0.15 0.01 70)", "oklch(0.25 0.01 70)", "oklch(0.35 0.012 70)", "oklch(0.45 0.015 70)", "oklch(0.55 0.018 70)", "oklch(0.65 0.02 70)", "oklch(0.75 0.02 70)", "oklch(0.85 0.015 70)"] },
+      "surface-dark": { "role": "neutral", "displayName": "Surface Dark", "canonical": "oklch(0.22 0.008 80)", "tonalRamp": ["oklch(0.022 0.005 80)", "oklch(0.07 0.006 80)", "oklch(0.12 0.007 80)", "oklch(0.17 0.007 80)", "oklch(0.22 0.008 80)", "oklch(0.35 0.01 80)", "oklch(0.50 0.012 80)", "oklch(0.65 0.012 80)"] },
+      "surface-deep": { "role": "neutral", "displayName": "Surface Deep", "canonical": "oklch(0.14 0.008 80)", "tonalRamp": ["oklch(0.022 0.005 80)", "oklch(0.05 0.006 80)", "oklch(0.08 0.007 80)", "oklch(0.11 0.007 80)", "oklch(0.14 0.008 80)", "oklch(0.22 0.008 80)", "oklch(0.35 0.01 80)", "oklch(0.50 0.012 80)"] },
+      "muted-text": { "role": "neutral", "displayName": "Muted Text", "canonical": "oklch(0.55 0.015 80)", "tonalRamp": ["oklch(0.12 0.007 80)", "oklch(0.22 0.008 80)", "oklch(0.35 0.01 80)", "oklch(0.45 0.012 80)", "oklch(0.55 0.015 80)", "oklch(0.65 0.015 80)", "oklch(0.75 0.012 80)", "oklch(0.87 0.01 80)"] },
+      "border-subtle": { "role": "neutral", "displayName": "Border Subtle", "canonical": "oklch(0.98 0.005 80)", "tonalRamp": [] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Brand name, section markers. Always uppercase, widest tracking." },
+      "headline": { "displayName": "Headline", "purpose": "Section headlines. Negative tracking at scale for visual density." },
+      "title": { "displayName": "Title", "purpose": "Package names, client names. Uppercase for labels." },
+      "body": { "displayName": "Body", "purpose": "Descriptions, package details. Max 65ch." },
+      "label": { "displayName": "Label", "purpose": "Chips, badges, CTA buttons. Always uppercase, cinematic stamp." }
+    },
+    "shadows": [
+      { "name": "accent-glow", "value": "0 0 30px -5px #f8d17d", "purpose": "Ambient gold glow on primary conversion elements (Scale package, CTA button). Never decorative." },
+      { "name": "accent-glow-sm", "value": "0 0 20px -5px #f8d17d", "purpose": "Smaller gold glow for hover states and active chips." }
+    ],
+    "motion": [
+      { "name": "ease-out-standard", "value": "cubic-bezier(0.25, 1, 0.5, 1)", "purpose": "Default ease-out for entrances and state changes. Close to ease-out-quart." },
+      { "name": "duration-enter", "value": "0.5s", "purpose": "Standard entrance animation duration." },
+      { "name": "duration-exit", "value": "0.3s", "purpose": "Exit animation duration. Snappier than entrance." },
+      { "name": "duration-state", "value": "0.3s", "purpose": "Hover/focus/active transition duration." },
+      { "name": "stagger", "value": "0.1s", "purpose": "Delay between sequential element entrances in a group." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main CTA. Screen Gold pill, uppercase, bold. The decisive action.",
+      "html": "<button class=\"ds-btn-primary\">CALL (313) 742-5658</button>",
+      "css": ".ds-btn-primary { background: #f8d17d; color: #1c1917; padding: 16px 32px; border-radius: 9999px; font-family: Geist Sans, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.3s, transform 0.3s; } .ds-btn-primary:hover { background: #f0c06a; transform: scale(1.05); box-shadow: 0 0 20px -5px #f8d17d; } .ds-btn-primary:focus-visible { outline: 3px solid #f8d17d; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary controls in modal and overlays. Transparent, appears on hover.",
+      "html": "<button class=\"ds-btn-ghost\">PAUSE</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #fafafa; padding: 8px; border-radius: 9999px; font-family: Geist Sans, system-ui, sans-serif; font-size: 0.75rem; font-weight: 500; border: none; cursor: pointer; transition: background 0.3s, color 0.3s; } .ds-btn-ghost:hover { background: rgba(255,255,255,0.1); color: #f8d17d; } .ds-btn-ghost:focus-visible { outline: 3px solid #f8d17d; outline-offset: 2px; }"
+    },
+    {
+      "name": "Category Chip (Active)",
+      "kind": "chip",
+      "refersTo": "chip-active",
+      "description": "Selected category filter. Screen Gold fill marks the active view.",
+      "html": "<button class=\"ds-chip-active\">Retail</button>",
+      "css": ".ds-chip-active { background: #f8d17d; color: #1c1917; padding: 8px 24px; border-radius: 9999px; font-family: Geist Sans, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.05em; border: 1px solid #f8d17d; cursor: pointer; box-shadow: 0 0 20px -5px #f8d17d; transition: all 0.3s; }"
+    },
+    {
+      "name": "Category Chip (Inactive)",
+      "kind": "chip",
+      "refersTo": "chip-inactive",
+      "description": "Unselected category filter. Muted, awaiting selection.",
+      "html": "<button class=\"ds-chip-inactive\">Restaurants</button>",
+      "css": ".ds-chip-inactive { background: transparent; color: #71717a; padding: 8px 24px; border-radius: 9999px; font-family: Geist Sans, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: all 0.3s; } .ds-chip-inactive:hover { border-color: #27272a; color: #a1a1aa; }"
+    },
+    {
+      "name": "Video Card",
+      "kind": "card",
+      "refersTo": "button-primary",
+      "description": "9:16 portrait card. Poster at rest, hover-to-play, bottom gradient overlay with client/title.",
+      "html": "<div class=\"ds-video-card\">\n  <div class=\"ds-video-poster\" style=\"background:#18181b;\"></div>\n  <div class=\"ds-video-play\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\"><polygon points=\"5,3 19,12 5,21\"/></svg></div>\n  <div class=\"ds-video-info\">\n    <span class=\"ds-video-client\">WEARWOLFE</span>\n    <span class=\"ds-video-title\">Clever Coyote Highlight</span>\n  </div>\n</div>",
+      "css": ".ds-video-card { position: relative; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; background: #18181b; border: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: border-color 0.3s; } .ds-video-card:hover { border-color: rgba(248,209,125,0.5); } .ds-video-poster { position: absolute; inset: 0; background-size: cover; background-position: center; } .ds-video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; } .ds-video-play svg { color: #1c1917; width: 20px; height: 20px; margin-left: 4px; opacity: 0; transform: scale(0.5); transition: all 0.3s; } .ds-video-card:hover .ds-video-play svg { opacity: 1; transform: scale(1); } .ds-video-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; padding-top: 48px; background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.6), transparent); opacity: 0; transition: opacity 0.3s; } .ds-video-card:hover .ds-video-info { opacity: 1; } .ds-video-client { display: block; font-family: Geist Sans, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #f8d17d; margin-bottom: 4px; } .ds-video-title { display: block; font-family: Geist Sans, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; color: #fafafa; line-height: 1.3; }"
+    },
+    {
+      "name": "Pricing Card (Default)",
+      "kind": "card",
+      "refersTo": "button-primary",
+      "description": "Standard pricing tier. Flat, tonal surface with subtle border.",
+      "html": "<div class=\"ds-pricing-card\">\n  <div class=\"ds-pricing-icon\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#f8d17d\" stroke-width=\"2\"><path d=\"M23 7l-7 5 7 5V7z\"/><rect x=\"1\" y=\"5\" width=\"15\" height=\"14\" rx=\"2\" ry=\"2\"/></svg></div>\n  <span class=\"ds-pricing-name\">STARTER PACKAGE</span>\n  <span class=\"ds-pricing-price\">$1,000</span>\n  <span class=\"ds-pricing-count\">4 Videos</span>\n  <button class=\"ds-pricing-cta\">GET STARTED: (313) 742-5658</button>\n</div>",
+      "css": ".ds-pricing-card { display: flex; flex-direction: column; align-items: center; padding: 24px; border-radius: 16px; background: rgba(9,9,11,0.5); border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s, border-color 0.3s; } .ds-pricing-card:hover { transform: scale(1.02); border-color: rgba(255,255,255,0.2); } .ds-pricing-icon { width: 48px; height: 48px; border-radius: 50%; background: #27272a; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; } .ds-pricing-name { font-family: Geist Sans, system-ui, sans-serif; font-size: 1.25rem; font-weight: 700; color: #fafafa; text-transform: uppercase; letter-spacing: 0.05em; } .ds-pricing-price { font-family: Geist Sans, system-ui, sans-serif; font-size: 2.25rem; font-weight: 700; color: #f8d17d; margin: 8px 0 4px; } .ds-pricing-count { font-family: Geist Sans, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; } .ds-pricing-cta { display: block; width: 100%; padding: 12px 24px; margin-top: 32px; background: #27272a; color: #fafafa; font-family: Geist Sans, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border: none; border-radius: 8px; cursor: pointer; transition: background 0.3s; } .ds-pricing-cta:hover { background: #3f3f46; }"
+    },
+    {
+      "name": "Pricing Card (Best Value)",
+      "kind": "card",
+      "refersTo": "button-primary",
+      "description": "Highlighted tier. Screen Gold border and ambient glow mark it as the recommended choice.",
+      "html": "<div class=\"ds-pricing-best\">\n  <span class=\"ds-pricing-badge\">Best Value</span>\n  <div class=\"ds-pricing-icon\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"#f8d17d\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/></svg></div>\n  <span class=\"ds-pricing-name\">SCALE PACKAGE</span>\n  <span class=\"ds-pricing-price\">$2,500</span>\n  <span class=\"ds-pricing-count\">12 Videos</span>\n  <button class=\"ds-pricing-cta-gold\">GET STARTED: (313) 742-5658</button>\n</div>",
+      "css": ".ds-pricing-best { position: relative; display: flex; flex-direction: column; align-items: center; padding: 24px; border-radius: 16px; background: rgba(24,24,27,0.8); border: 1px solid #f8d17d; box-shadow: 0 0 30px -5px #f8d17d; transition: transform 0.3s; } .ds-pricing-best:hover { transform: scale(1.02); } .ds-pricing-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); padding: 4px 16px; background: #f8d17d; color: #000; font-family: Geist Sans, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border-radius: 9999px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); } .ds-pricing-icon { width: 48px; height: 48px; border-radius: 50%; background: #27272a; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; } .ds-pricing-name { font-family: Geist Sans, system-ui, sans-serif; font-size: 1.25rem; font-weight: 700; color: #fafafa; text-transform: uppercase; letter-spacing: 0.05em; } .ds-pricing-price { font-family: Geist Sans, system-ui, sans-serif; font-size: 2.25rem; font-weight: 700; color: #f8d17d; margin: 8px 0 4px; } .ds-pricing-count { font-family: Geist Sans, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; } .ds-pricing-cta-gold { display: block; width: 100%; padding: 12px 24px; margin-top: 32px; background: #f8d17d; color: #000; font-family: Geist Sans, system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; border: none; border-radius: 8px; cursor: pointer; transition: background 0.3s; } .ds-pricing-cta-gold:hover { background: #f0c06a; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Curated Archive",
+    "overview": "Every frame is selected. Every piece earns its place. The site functions as a curated archive of cinematic work, not a freelancer's highlight reel. Dark, warm, unhurried. Visitors enter a space where the portfolio breathes and the interface recedes. The system is committed-dark: a warm near-black canvas that lets the Screen Gold accent mark decisive moments. Tonal layering, not shadows, creates depth. Surfaces are flat at rest; the only glow belongs to the accent. Typography is uppercase and tracked-out at small sizes, giving labels and navigation a cinematic stamp. At display scale, the same family tightens its tracking for impact. The overall density is low, with generous negative space treating the viewport like a gallery wall. This system explicitly rejects cookie-cutter freelancer portfolios with their stock vibes and template layouts, bloated agency sites that prioritize spectacle over substance, and neon club flyer aesthetics where flash substitutes for taste.",
+    "keyCharacteristics": [
+      "Dark warm canvas with tonal layering, no structural shadows",
+      "Single accent (Screen Gold) used sparingly at decision points and highlights",
+      "Uppercase tracked labels as cinematic stamps throughout",
+      "9:16 portrait video cards as the signature format",
+      "Generous negative space, low visual density",
+      "Framer Motion for entrance choreography only, no decorative animation"
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Screen Gold is the only saturated color on the page. It appears at decision points (buttons, active chips, client labels, package highlights) and never as decoration. Its rarity is the point.", "section": "colors" },
+      { "name": "The Warm Dark Doctrine", "body": "Every neutral, from the deepest black to the lightest gray, carries a chroma of 0.005 to 0.015 toward hue 80 (warm amber). Pure #000 or #fff is prohibited. The warmth is subtle but structural.", "section": "colors" },
+      { "name": "The Uppercase Stamp Rule", "body": "Any text at 0.75rem or 0.875rem that functions as a label, badge, or navigation element is set uppercase with 0.1em letter-spacing. This is the signature type treatment.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. The only shadow-like effect is the Screen Gold glow on primary conversion elements. If a card appears to float, the background shade is wrong, not the shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use Screen Gold only at decision points: primary buttons, active chips, client labels, and package highlights.",
+      "Do warm-tint every neutral toward hue 80 with chroma 0.005 to 0.015.",
+      "Do use tonal layering (stepping background lightness) instead of shadows to convey depth.",
+      "Do set labels and navigation text uppercase with 0.1em tracking for the cinematic stamp.",
+      "Do keep the video card as the signature component: 9:16 portrait, hover-to-play, bottom gradient overlay.",
+      "Do cap body line length at 65ch for readable prose.",
+      "Do use exponential ease-out curves for all motion."
+    ],
+    "donts": [
+      "Don't use border-left or border-right greater than 1px as a colored accent stripe on cards or callouts.",
+      "Don't use background-clip: text with a gradient.",
+      "Don't add glassmorphism as a default surface treatment.",
+      "Don't use the hero-metric template (big number, small label, gradient accent).",
+      "Don't create identical card grids repeating the same pattern endlessly.",
+      "Don't add structural box-shadows to cards at rest.",
+      "Don't use cookie-cutter freelancer portfolio patterns, bloated agency spectacle, or neon club flyer aesthetics.",
+      "Don't use em dashes.",
+      "Don't animate CSS layout properties."
+    ]
+  }
+}
