@@ -197,14 +197,18 @@ export function Pricing() {
                                 </ul>
 
                                 <a
-                                    href="tel:+13137425658"
+                                    href="#booking"
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+                                    }}
                                     className={cn(
                                         "block text-center w-full py-3 px-6 rounded-lg font-bold uppercase tracking-wide transition-colors",
                                         pkg.isBestValue
                                             ? "bg-brand text-black hover:bg-brand/90"
                                             : "bg-zinc-800 text-white hover:bg-zinc-700"
                                     )}>
-                                    Get Started: (313) 742-5658
+                                    Book a Call
                                 </a>
                             </motion.div>
                         ))}

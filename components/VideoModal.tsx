@@ -123,10 +123,17 @@ export function VideoModal({ video, onClose }: VideoModalProps) {
                             <h2 className="text-xl font-bold tracking-tight leading-none mb-4">{video.title}</h2>
 
                             <a
-                                href="tel:+13137425658"
+                                href="#booking"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    onClose();
+                                    setTimeout(() => {
+                                        document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' });
+                                    }, 300);
+                                }}
                                 className="inline-block px-5 py-2 bg-brand text-black text-xs font-bold uppercase tracking-widest rounded-full hover:bg-brand/90 transition-colors"
                             >
-                                Book: (313) 742-5658
+                                Book a Call
                             </a>
                         </div>
 

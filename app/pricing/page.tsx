@@ -8,6 +8,7 @@ export default function PricingPage() {
         <main className="min-h-screen flex flex-col items-center bg-background">
             <Hero />
             <Pricing />
+            <ContactCTA />
             <Footer />
         </main>
     );

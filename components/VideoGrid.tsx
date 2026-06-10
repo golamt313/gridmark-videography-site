@@ -7,7 +7,7 @@ import { VideoModal } from "./VideoModal";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const CATEGORIES: (Category | 'All')[] = ['All', 'Retail', 'Restaurants', 'Events'];
+const CATEGORIES: (Category | 'All')[] = ['All', 'Retail', 'Restaurants', 'Events', 'Health & Wellness'];
 
 export function VideoGrid() {
     const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
